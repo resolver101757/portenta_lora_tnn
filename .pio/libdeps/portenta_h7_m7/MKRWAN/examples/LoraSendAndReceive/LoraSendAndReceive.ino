@@ -45,13 +45,15 @@ void setup() {
 
 void loop() {
   Serial.println();
-  Serial.println("Enter a message to send to network");
-  Serial.println("(make sure that end-of-line 'NL' is enabled)");
+  // Serial.println("Enter a message to send to network");
+  // Serial.println("(make sure that end-of-line 'NL' is enabled)");
+  Serial.println("sending message to ttn");
 
-  while (!Serial.available());
-  String msg = Serial.readStringUntil('\n');
+  // while (!Serial.available());
+  // String msg = Serial.readStringUntil('\n');
+  String msg = "hello world";
 
-  Serial.println();
+  //Serial.println();
   Serial.print("Sending: " + msg + " - ");
   for (unsigned int i = 0; i < msg.length(); i++) {
     Serial.print(msg[i] >> 4, HEX);
