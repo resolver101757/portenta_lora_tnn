@@ -1,0 +1,34 @@
+// AUTOMATICALLY GENERATED FILE. PLEASE DO NOT MODIFY IT MANUALLY
+//
+// PIO Unified Debugger
+//
+// Documentation: https://docs.platformio.org/page/plus/debugging.html
+// Configuration: https://docs.platformio.org/page/projectconf/section_env_debug.html
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "platformio-debug",
+            "request": "launch",
+            "name": "PIO Debug",
+            "executable": "C:/IOT/Github/microcontroller/portenta_lora_tnn/.pio/build/portenta_h7_m7/firmware.elf",
+            "projectEnvName": "portenta_h7_m7",
+            "toolchainBinDir": "C:/Users/alex.kelly/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+            "internalConsoleOptions": "openOnSessionStart",
+            "preLaunchTask": {
+                "type": "PlatformIO",
+                "task": "Pre-Debug"
+            }
+        },
+        {
+            "type": "platformio-debug",
+            "request": "launch",
+            "name": "PIO Debug (skip Pre-Debug)",
+            "executable": "C:/IOT/Github/microcontroller/portenta_lora_tnn/.pio/build/portenta_h7_m7/firmware.elf",
+            "projectEnvName": "portenta_h7_m7",
+            "toolchainBinDir": "C:/Users/alex.kelly/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}

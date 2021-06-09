@@ -2,11 +2,8 @@
 #include <MKRWAN.h>
 
 LoRaModem modem;
-
-// Uncomment if using the Murata chip as a module
-// LoRaModem modem(Serial1);
-
 #include "arduino_secrets.h"
+
 // Please enter your sensitive data in the Secret tab or arduino_secrets.h
 String appEui = SECRET_APP_EUI;
 String appKey = SECRET_APP_KEY;
@@ -16,6 +13,7 @@ void setup() {
   Serial.begin(115200);
   while (!Serial);
   // change this to your regional band (eg. US915, AS923, ...)
+  // UK frequency is EU686
   if (!modem.begin(EU868)) {
     Serial.println("Failed to start module");
     while (1) {}
@@ -39,25 +37,17 @@ void setup() {
 }
 
 void loop() {
-  // Serial.println();
-  // // Serial.println("Enter a message to send to network");
-  // Serial.println("(make sure that end-of-line 'NL' is enabled)");
 
   Serial.println("sending message to ttn");
-  
-  // while (!Serial.available());
-  // String msg = Serial.readStringUntil('\n');
 
-  // Serial.println();
-  // Serial.print("Sending: " + msg + " - ");
-
-  String msg = "hello world";
+  String msg = "hello world 1";
 
   for (unsigned int i = 0; i < msg.length(); i++) {
     Serial.print(msg[i] >> 4, HEX);
     Serial.print(msg[i] & 0xF, HEX);
     Serial.print(" ");
   }
+
   Serial.println();
 
   int err;
@@ -71,22 +61,31 @@ void loop() {
     Serial.println("(you may send a limited amount of messages per minute, depending on the signal strength");
     Serial.println("it may vary from 1 message every couple of seconds to 1 message every minute)");
   }
+  // this code is being run.  Work out whats going off
+  Serial.println("yes ive been reached");
   delay(1000);
   if (!modem.available()) {
     Serial.println("No downlink message received at this time.");
-    return;
   }
+
   char rcv[64];
   int i = 0;
+  
   while (modem.available()) {
     rcv[i++] = (char)modem.read();
   }
-  Serial.print("Received: ");
+
+  Serial.print("Any Received messages will apear after here: ");
   for (unsigned int j = 0; j < i; j++) {
     Serial.print(rcv[j] >> 4, HEX);
     Serial.print(rcv[j] & 0xF, HEX);
     Serial.print(" ");
   }
   Serial.println();
-  delay(10000);
+  
+  // The modem will not allow sending more than one message every 2 minutes,
+  // this is enforced by firmware and can not be changed.
+  
+  delay(120000); // sleep for 2 mins 
+
 }
